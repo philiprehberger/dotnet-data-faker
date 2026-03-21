@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Build settings -->
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <!-- Package metadata -->
+    <PackageId>Philiprehberger.DataFaker</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Philip Rehberger</Authors>
+    <Description>Lightweight test data generator — names, emails, addresses, phone numbers, dates, and lorem ipsum with reproducible seeds.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>faker;test-data;mock;generator;testing</PackageTags>
+    <RepositoryUrl>https://github.com/philiprehberger/dotnet-data-faker</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
