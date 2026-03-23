@@ -4,7 +4,7 @@
 [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.DataFaker.svg)](https://www.nuget.org/packages/Philiprehberger.DataFaker)
 [![License](https://img.shields.io/github/license/philiprehberger/dotnet-data-faker)](LICENSE)
 
-Lightweight test data generator — names, emails, addresses, phone numbers, dates, and lorem ipsum with reproducible seeds.
+Lightweight test data generator for names, emails, addresses, phones, dates, and lorem ipsum with seeded reproducibility.
 
 ## Installation
 

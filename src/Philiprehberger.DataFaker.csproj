@@ -11,9 +11,9 @@
 
     <!-- Package metadata -->
     <PackageId>Philiprehberger.DataFaker</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Philip Rehberger</Authors>
-    <Description>Lightweight test data generator — names, emails, addresses, phone numbers, dates, and lorem ipsum with reproducible seeds.</Description>
+    <Description>Lightweight test data generator for names, emails, addresses, phones, dates, and lorem ipsum with seeded reproducibility.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>faker;test-data;mock;generator;testing</PackageTags>
