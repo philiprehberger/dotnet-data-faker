@@ -3,6 +3,7 @@
 [![CI](https://github.com/philiprehberger/dotnet-data-faker/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/dotnet-data-faker/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.DataFaker.svg)](https://www.nuget.org/packages/Philiprehberger.DataFaker)
 [![License](https://img.shields.io/github/license/philiprehberger/dotnet-data-faker)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 Lightweight test data generator for names, emails, addresses, phones, dates, and lorem ipsum with seeded reproducibility.
 
@@ -102,4 +103,4 @@ dotnet build src/Philiprehberger.DataFaker.csproj --configuration Release
 
 ## License
 
-MIT
+[MIT](LICENSE)
