@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0 (2026-03-27)
+
+- Add FakerInternet category (URL, domain, IPv4, IPv6, MAC address, user agent, slug)
+- Add FakerFinance category (credit card, IBAN, BIC/SWIFT, currency code, amount)
+- Add weighted random selection with PickWeighted
+- Add List helper for generating collections of fake items
+
 ## 0.1.2 (2026-03-26)
 
 - Add Sponsor badge and fix License link format in README

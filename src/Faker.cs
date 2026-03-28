@@ -164,11 +164,81 @@ public static class Faker
     public static T Pick<T>(IList<T> items) => items[RandomInstance.Next(items.Count)];
 
     /// <summary>
+    /// Picks a random element from the given list using weighted probabilities.
+    /// </summary>
+    /// <typeparam name="T">The element type.</typeparam>
+    /// <param name="items">A list of items paired with their relative weights.</param>
+    /// <returns>A randomly selected element based on the weights.</returns>
+    /// <exception cref="ArgumentException">Thrown when <paramref name="items"/> is empty or total weight is zero.</exception>
+    public static T PickWeighted<T>(IReadOnlyList<(T item, double weight)> items)
+    {
+        if (items.Count == 0)
+        {
+            throw new ArgumentException("Items list must not be empty.", nameof(items));
+        }
+
+        var totalWeight = 0.0;
+        for (var i = 0; i < items.Count; i++)
+        {
+            totalWeight += items[i].weight;
+        }
+
+        if (totalWeight <= 0)
+        {
+            throw new ArgumentException("Total weight must be greater than zero.", nameof(items));
+        }
+
+        var threshold = RandomInstance.NextDouble() * totalWeight;
+        var cumulative = 0.0;
+        for (var i = 0; i < items.Count; i++)
+        {
+            cumulative += items[i].weight;
+            if (threshold <= cumulative)
+            {
+                return items[i].item;
+            }
+        }
+
+        return items[^1].item;
+    }
+
+    /// <summary>
+    /// Generates a list of fake items using the provided generator function.
+    /// </summary>
+    /// <typeparam name="T">The element type.</typeparam>
+    /// <param name="count">The exact number of items to generate.</param>
+    /// <param name="generator">A function that produces a single fake item.</param>
+    /// <returns>A list of generated items.</returns>
+    public static List<T> List<T>(int count, Func<T> generator)
+    {
+        var result = new List<T>(count);
+        for (var i = 0; i < count; i++)
+        {
+            result.Add(generator());
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Generates a list of fake items with a random count between <paramref name="min"/> and <paramref name="max"/>.
+    /// </summary>
+    /// <typeparam name="T">The element type.</typeparam>
+    /// <param name="min">The inclusive minimum number of items.</param>
+    /// <param name="max">The inclusive maximum number of items.</param>
+    /// <param name="generator">A function that produces a single fake item.</param>
+    /// <returns>A list of generated items.</returns>
+    public static List<T> List<T>(int min, int max, Func<T> generator)
+    {
+        var count = Between(min, max);
+        return List(count, generator);
+    }
+
+    /// <summary>
     /// Creates a seeded <see cref="FakerInstance"/> for reproducible data generation.
     /// </summary>
     /// <param name="seed">The seed value for deterministic output.</param>
     /// <returns>A new <see cref="FakerInstance"/> initialized with the given seed.</returns>
     public static FakerInstance WithSeed(int seed) => new(seed);
 
-    private static T Pick<T>(T[] items) => items[RandomInstance.Next(items.Length)];
+    internal static T Pick<T>(T[] items) => items[RandomInstance.Next(items.Length)];
 }

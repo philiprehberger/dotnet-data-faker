@@ -17,6 +17,7 @@ jobs:
           dotnet-version: '8.0.x'
       - run: dotnet restore src/Philiprehberger.DataFaker.csproj
       - run: dotnet build src/Philiprehberger.DataFaker.csproj --configuration Release --no-restore
+      - run: dotnet test tests/Philiprehberger.DataFaker.Tests/Philiprehberger.DataFaker.Tests.csproj --configuration Release --no-restore
 
   publish:
     needs: build
