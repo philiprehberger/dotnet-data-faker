@@ -11,7 +11,7 @@
 
     <!-- Package metadata -->
     <PackageId>Philiprehberger.DataFaker</PackageId>
-    <Version>0.2.0</Version>
+    <Version>0.2.1</Version>
     <Authors>Philip Rehberger</Authors>
     <Description>Lightweight test data generator for names, emails, addresses, phones, dates, internet, finance, and lorem ipsum.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
