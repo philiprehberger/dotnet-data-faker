@@ -169,5 +169,31 @@ public sealed class FakerInstance
     /// <returns>A randomly selected element.</returns>
     public T Pick<T>(IList<T> items) => items[_random.Next(items.Count)];
 
+    /// <summary>
+    /// Generates a random UUID v4.
+    /// </summary>
+    /// <returns>A UUID v4 string.</returns>
+    public string Uuid() => Guid.NewGuid().ToString();
+
+    /// <summary>
+    /// Generates a time-sortable sequential UUID using the current timestamp.
+    /// </summary>
+    /// <returns>A UUID v7-style string with timestamp prefix for sortability.</returns>
+    public string UuidSequential()
+    {
+        var timestamp = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var bytes = new byte[16];
+        var timeBytes = BitConverter.GetBytes(timestamp);
+        if (BitConverter.IsLittleEndian) Array.Reverse(timeBytes);
+        // First 6 bytes = timestamp (for sortability)
+        Buffer.BlockCopy(timeBytes, 2, bytes, 0, 6);
+        // Remaining 10 bytes = random
+        _random.NextBytes(bytes.AsSpan(6));
+        // Set version 7 bits
+        bytes[6] = (byte)((bytes[6] & 0x0F) | 0x70);
+        bytes[8] = (byte)((bytes[8] & 0x3F) | 0x80);
+        return new Guid(bytes).ToString();
+    }
+
     private T Pick<T>(T[] items) => items[_random.Next(items.Length)];
 }

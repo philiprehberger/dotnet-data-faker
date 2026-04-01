@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (2026-03-31)
+
+- Add locale support for culturally appropriate data generation (en-US, de-DE, fr-FR, es-ES)
+- Add UUID v4 and sequential UUID generation
+- Add FakerBuilder for convention-based object population
+
 ## 0.2.1 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section

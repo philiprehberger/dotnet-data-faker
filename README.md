@@ -4,7 +4,7 @@
 [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.DataFaker.svg)](https://www.nuget.org/packages/Philiprehberger.DataFaker)
 [![Last updated](https://img.shields.io/github/last-commit/philiprehberger/dotnet-data-faker)](https://github.com/philiprehberger/dotnet-data-faker/commits/main)
 
-Lightweight test data generator for names, emails, addresses, phones, dates, internet, finance, and lorem ipsum.
+Lightweight test data generator with locale support, structured builders, and UUID generation.
 
 ## Installation
 
@@ -76,6 +76,53 @@ var scores = Faker.List(3, 8, () => Faker.Between(1, 100));
 // [42, 87, 15, 63, 91] (random count between 3 and 8)
 ```
 
+### Locale Support
+
+```csharp
+using Philiprehberger.DataFaker;
+
+var de = Faker.WithLocale("de-DE");
+var name = de.Name();     // "Hans Mueller"
+var city = de.City();     // "Berlin"
+var phone = de.Phone();   // "+49 172 9384756"
+var email = de.Email();   // "hans.mueller@example.com"
+
+var fr = Faker.WithLocale("fr-FR");
+var frName = fr.Name();   // "Jean Martin"
+
+var es = Faker.WithLocale("es-ES");
+var esCity = es.City();   // "Madrid"
+```
+
+### UUID Generation
+
+```csharp
+using Philiprehberger.DataFaker;
+
+var uuid = Faker.Uuid();            // "a3b8f042-1c7e-4d9a-b5e6-8f2c3a7d1e09"
+var seqId = Faker.UuidSequential();  // time-sortable UUID v7-style
+```
+
+### Object Builder
+
+```csharp
+using Philiprehberger.DataFaker;
+
+public class User
+{
+    public string FirstName { get; set; } = "";
+    public string Email { get; set; } = "";
+    public int Age { get; set; }
+    public bool IsActive { get; set; }
+}
+
+var user = FakerBuilder.Build<User>();
+// user.FirstName = "Mary"
+// user.Email = "james.smith@example.com"
+// user.Age = 427
+// user.IsActive = true
+```
+
 ### Seeded Reproducibility
 
 ```csharp
@@ -114,7 +161,27 @@ var email = faker.Email();  // deterministic
 | `PickWeighted<T>(items)` | Weighted random selection |
 | `List<T>(count, generator)` | Generate a list of fake items |
 | `List<T>(min, max, generator)` | Generate a list with random count |
+| `Uuid()` | Random UUID v4 |
+| `UuidSequential()` | Time-sortable sequential UUID |
+| `WithLocale(locale)` | Create a locale-specific `LocaleFaker` |
 | `WithSeed(seed)` | Create a seeded `FakerInstance` |
+
+### `LocaleFaker`
+
+| Method | Description |
+|--------|-------------|
+| `Name()` | Locale-specific full name |
+| `FirstName()` | Locale-specific first name |
+| `LastName()` | Locale-specific last name |
+| `City()` | Locale-specific city name |
+| `Phone()` | Locale-specific formatted phone number |
+| `Email()` | Email using locale-specific names |
+
+### `FakerBuilder` (static)
+
+| Method | Description |
+|--------|-------------|
+| `Build<T>()` | Populate an object using convention-based rules |
 
 ### `FakerInternet` (static)
 
@@ -140,7 +207,7 @@ var email = faker.Email();  // deterministic
 
 ### `FakerInstance`
 
-Same methods as `Faker` (except `WithSeed`, `PickWeighted`, `List`), but instance-based with a seeded `Random` for deterministic output.
+Same methods as `Faker` (except `WithSeed`, `WithLocale`, `PickWeighted`, `List`), plus `Uuid()` and `UuidSequential()`, but instance-based with a seeded `Random` for deterministic output.
 
 ## Development
 
